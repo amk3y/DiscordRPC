@@ -133,6 +133,7 @@ extension DiscordRPC {
             """)
         }
     }
+    
 
     private func handleEvent(_ data: Data) {
         do {
@@ -166,7 +167,7 @@ extension DiscordRPC {
             }
         } catch {
             logger.error("""
-                HandleEvent: failed with error: \(error.localizedDescription); \
+                HandleEvent: failed with error: \(error); \
                 and data: \(String(data: data, encoding: .utf8) ?? "nil")
             """)
         }

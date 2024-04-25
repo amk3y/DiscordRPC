@@ -54,6 +54,26 @@ extension DiscordRPC {
         try self.send(requestJSON, .frame)
         return nonce
     }
+    
+    public func clearActivity() throws -> String {
+        let nonce = generateNonce()
+        let args = RequestSetActivityArgs(pid: Int(getpid().magnitude), activity: nil)
+        let request = try RequestSetActivity( nonce: nonce, args: args)
+        let requestJSON = try request.jsonString()
+
+        let response = try syncResponse(requestJSON: requestJSON, nonce: nonce)
+        return String(decoding: response, as: UTF8.self)
+    }
+    
+    public func setActivity(activity: Activity) throws -> String {
+        let nonce = generateNonce()
+        let args = RequestSetActivityArgs(pid: Int(getpid().magnitude), activity: activity)
+        let request = try RequestSetActivity( nonce: nonce, args: args)
+        let requestJSON = try request.jsonString()
+
+        let response = try syncResponse(requestJSON: requestJSON, nonce: nonce)
+        return String(decoding: response, as: UTF8.self)
+    }
 
     public func subscribe(event: EventType, id: String? = nil) throws -> ResponseSubscribe {
         let nonce = generateNonce()
