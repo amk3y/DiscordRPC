@@ -1,13 +1,14 @@
 import Foundation
 import AppKit
 
+
 public class User: Codable {
     public let id: String
     public let username: String
     public let discriminator: String
     public let globalName: String
     public let avatar: String
-    public let avatarDecorationData: String?
+    public let avatarDecorationData: AvatarDecorationData?
     public let bot: Bool?
     public let system: Bool?
     public let mfaEnabled: Bool?
